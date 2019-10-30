@@ -105,7 +105,7 @@ function_name: function(callback) {
 
 传入的result形式为
 
-```json
+```javascript
 {
     function_name: [arg2, arg3]//传入值为array
 }
@@ -113,7 +113,7 @@ function_name: function(callback) {
 
 如果只有arg2，则result形式为
 
-```json
+```javascript
 {
     function_name: arg2//传入值为string
 }
