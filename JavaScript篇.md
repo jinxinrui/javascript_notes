@@ -84,3 +84,44 @@ console.log(p.m()); // 5
 // 所以，此时的 'this.a' 即 p.a，就是 p 的自身属性 'a' 
 ```
 
+# 常见问题
+
+## 可枚举属性不可枚举属性
+
+由属性的enumerable值决定，可枚举性决定了这个属性能否被for...in查找遍历到。
+
+属性的可枚举性会影响以下三个函数的结果：
+
+for...in
+
+Object.keys()
+
+JSON.stringify
+
+
+
+```js
+function Person() {
+  this.name = "KXY";
+}
+Person.prototype = {
+  constructor: Person,
+  job: "student"
+};
+var kxy = new Person();
+Object.defineProperty(kxy, "sex", {
+  value: "female",
+  enumerable: false
+});
+
+for(var pro in kxy) {
+    console.log("kxy." + pro + " = " + kxy[pro]);// 除‘sex’意外都可以遍历到
+  }
+
+console.log(Object.keys(kxy));// 返回["name"] 说明该方法只返回对象本身具有可枚举性的属性
+
+console.log(JSON.stringify(kxy));// 返回{"name": "KXY"} 该方法只能读取对象本身的具有可枚举性的属性，并序列化为JSON对象
+```
+
+ 
+
